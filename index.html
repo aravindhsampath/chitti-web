@@ -288,9 +288,9 @@
             const msgBubble = document.createElement('div');
             
             if (role === 'user') {
-                msgBubble.className = `px-4 py-2.5 rounded-xl bg-surface border border-borderline text-primary shadow-sm leading-relaxed text-sm`;
+                msgBubble.className = `px-5 py-3 rounded-2xl bg-surface text-primary shadow-sm leading-relaxed text-sm`;
             } else {
-                msgBubble.className = `py-1 text-primary leading-relaxed text-sm`;
+                msgBubble.className = `px-5 py-3 rounded-2xl bg-surfaceHover text-primary leading-relaxed text-sm`;
             }
             msgBubble.innerHTML = text.replace(/\n/g, '<br>');
             
@@ -327,7 +327,7 @@
             label.innerText = 'Chitti';
             
             const loadingBubble = document.createElement('div');
-            loadingBubble.className = 'py-1 flex items-center gap-2 text-secondary';
+            loadingBubble.className = 'px-5 py-3 rounded-2xl bg-surfaceHover flex items-center gap-2 text-secondary';
             loadingBubble.innerHTML = '<div class="w-1.5 h-1.5 rounded-full bg-current animate-ping"></div><span class="text-sm font-medium">Retrieving...</span>';
             
             loadingMsgContainer.appendChild(label);
