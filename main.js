@@ -11,6 +11,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Topic Group Collapsible Logic
+    const topicHeaders = document.querySelectorAll('.topic-header');
+    topicHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const group = header.closest('.topic-group');
+            const isOpen = group.classList.contains('open');
+            
+            // Toggle class
+            group.classList.toggle('open');
+            
+            // Update ARIA attribute
+            header.setAttribute('aria-expanded', !isOpen);
+            
+            // Rotate caret icon
+            const icon = header.querySelector('i');
+            if (icon) {
+                if (isOpen) {
+                    icon.classList.remove('ph-caret-down');
+                    icon.classList.add('ph-caret-right');
+                } else {
+                    icon.classList.remove('ph-caret-right');
+                    icon.classList.add('ph-caret-down');
+                }
+            }
+        });
+    });
+
     // Auto-resize textarea based on content
     textarea.addEventListener('input', function() {
         requestAnimationFrame(() => {
