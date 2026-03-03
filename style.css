@@ -253,7 +253,7 @@ body.sidebar-collapsed .main-wrapper {
 .prompt-box {
     background-color: var(--surface);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-pill);
     width: 100%;
     max-width: 800px;
     padding: 16px;
@@ -261,22 +261,21 @@ body.sidebar-collapsed .main-wrapper {
     flex-direction: column;
     gap: var(--gap);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.prompt-box:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .prompt-box:focus-within {
-    border-color: var(--accent);
+    background-color: var(--surface-hover);
 }
 
 /* Accessibility: Focus visible outline */
 :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
+}
+
+textarea:focus-visible {
+    outline: none; /* Relies on .prompt-box:focus-within for visual feedback */
 }
 
 textarea {
@@ -332,29 +331,6 @@ textarea::placeholder {
     color: var(--primary-text);
 }
 
-.model-selector select {
-    background-color: transparent;
-    color: var(--secondary-text);
-    border: 1px solid transparent;
-    border-radius: var(--radius-md);
-    padding: 6px 12px 6px 8px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 0.875rem;
-    cursor: pointer;
-    outline: none;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-    appearance: none;
-}
-
-.model-selector select:hover {
-    background-color: var(--surface-hover);
-    color: var(--primary-text);
-}
-
-.model-selector select:focus {
-    border-color: var(--accent);
-}
 
 .send-btn {
     background-color: var(--surface-hover);
@@ -382,4 +358,138 @@ textarea::placeholder {
 
 .send-btn i {
     font-size: 1.25rem;
+}
+
+/* Custom Dropdown & Toggle UI */
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-text-btn {
+    background: transparent;
+    border: none;
+    color: var(--secondary-text);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    padding: 6px 10px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.icon-text-btn i {
+    font-size: 1.125rem;
+}
+
+.icon-text-btn:hover {
+    background-color: var(--surface-hover);
+    color: var(--primary-text);
+}
+
+.dropdown-menu {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    background-color: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    padding: 4px;
+    display: none;
+    flex-direction: column;
+    min-width: 120px;
+    z-index: 1000;
+}
+
+.dropdown-menu.show {
+    display: flex;
+}
+
+.dropdown-item {
+    background: transparent;
+    border: none;
+    color: var(--primary-text);
+    padding: 8px 12px;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: var(--surface-hover);
+}
+
+.dropdown-item.active {
+    background-color: var(--app-bg);
+    font-weight: 600;
+}
+
+.memory-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+}
+
+.memory-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: var(--secondary-text);
+    font-weight: 500;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 18px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--border-color);
+    transition: .2s;
+    border-radius: 18px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 2px;
+    bottom: 2px;
+    background-color: var(--secondary-text);
+    transition: .2s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--primary-text);
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px);
+    background-color: var(--surface);
 }

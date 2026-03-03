@@ -73,17 +73,34 @@
                     <button class="icon-btn" aria-label="Add files" title="Add files">
                         <i class="ph ph-paperclip"></i>
                     </button>
-                    <button class="icon-btn" aria-label="Toggle Thinking" title="Toggle Thinking">
-                        <i class="ph ph-brain"></i>
-                    </button>
-                    <button class="icon-btn" aria-label="Toggle Memory" title="Toggle Memory">
-                        <i class="ph ph-database"></i>
-                    </button>
-                    <div class="model-selector">
-                        <select aria-label="Model selector">
-                            <option>Chitti Default</option>
-                            <option>Chitti Pro</option>
-                        </select>
+                    <div class="dropdown-container">
+                        <button class="icon-text-btn" id="thinking-btn" aria-label="Thinking level" aria-haspopup="true" aria-expanded="false">
+                            <i class="ph ph-brain"></i>
+                            <span id="thinking-label">Low</span>
+                        </button>
+                        <div class="dropdown-menu drop-up" id="thinking-menu">
+                            <button class="dropdown-item" data-value="Min">Min</button>
+                            <button class="dropdown-item active" data-value="Low">Low</button>
+                            <button class="dropdown-item" data-value="Med">Med</button>
+                            <button class="dropdown-item" data-value="High">High</button>
+                        </div>
+                    </div>
+                    <div class="memory-toggle-container">
+                        <span class="memory-label">Memory</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="memory-toggle" aria-label="Toggle Memory">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="dropdown-container">
+                        <button class="icon-text-btn" id="model-btn" aria-label="Select Model" aria-haspopup="true" aria-expanded="false">
+                            <span id="model-label">gemini-flash</span>
+                            <i class="ph ph-caret-down" id="model-caret"></i>
+                        </button>
+                        <div class="dropdown-menu drop-up" id="model-menu">
+                            <button class="dropdown-item active" data-value="gemini-flash">gemini-flash</button>
+                            <button class="dropdown-item" data-value="gemini-pro">gemini-pro</button>
+                        </div>
                     </div>
                 </div>
                 <button class="send-btn" aria-label="Send message" title="Send message">
