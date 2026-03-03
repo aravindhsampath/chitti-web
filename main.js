@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
-});
     // Custom Dropdown Logic
     const dropdownContainers = document.querySelectorAll('.dropdown-container');
     
@@ -81,3 +80,54 @@ document.addEventListener('DOMContentLoaded', () => {
             if (btn) btn.setAttribute('aria-expanded', 'false');
         });
     });
+
+    // Theme Toggle Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = themeToggleBtn?.querySelector('i');
+
+    function setTheme(theme) {
+        if (theme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            if (themeIcon) themeIcon.className = 'ph ph-moon';
+            localStorage.setItem('theme', 'light');
+        } else if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            if (themeIcon) themeIcon.className = 'ph ph-sun';
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else {
+        // Check system preference
+        const isSystemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (themeIcon) themeIcon.className = isSystemLight ? 'ph ph-moon' : 'ph ph-sun';
+    }
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const isSystemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+            let currentTheme = document.documentElement.getAttribute('data-theme');
+            
+            if (!currentTheme) {
+                currentTheme = isSystemLight ? 'light' : 'dark';
+            }
+            
+            if (currentTheme === 'light') {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        });
+    }
+
+    // Listen for system theme changes if no user preference
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme') && themeIcon) {
+            themeIcon.className = e.matches ? 'ph ph-moon' : 'ph ph-sun';
+        }
+    });
+});
