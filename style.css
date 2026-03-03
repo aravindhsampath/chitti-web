@@ -248,15 +248,48 @@ body.sidebar-collapsed .main-wrapper {
     z-index: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centering the welcome text */
+    /* Justify content is managed dynamically via JS or auto margins */
 }
 
 .welcome-message {
+    margin: auto 0; /* Center vertically when it's the only child */
     text-align: center;
     color: var(--secondary-text);
     font-size: 1.5rem;
     font-family: 'Roboto', serif;
     letter-spacing: -0.02em;
+}
+
+/* Messages */
+.message-bubble {
+    padding: 16px 20px;
+    border-radius: var(--radius-lg);
+    max-width: 85%;
+    margin-bottom: 24px;
+    font-size: 1rem;
+    line-height: 1.6;
+    word-wrap: break-word;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.message-user {
+    background-color: var(--surface);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+.message-bot {
+    background-color: transparent;
+    color: var(--primary-text);
+    align-self: flex-start;
+    padding-left: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Prompt Box */

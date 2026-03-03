@@ -17,27 +17,64 @@ document.addEventListener('DOMContentLoaded', () => {
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight) + 'px';
             
-            // Prevent scrolling page when textarea grows
-            window.scrollTo(0, document.body.scrollHeight);
+            // No body scrolling needed since prompt is fixed and chat scrolls
         });
     });
+
+    const sendBtn = document.querySelector('.send-btn');
+    const chatContainer = document.querySelector('.chat-container');
+    const welcomeMessage = document.querySelector('.welcome-message');
+
+    function appendMessage(text, isUser) {
+        if (welcomeMessage && welcomeMessage.style.display !== 'none') {
+            welcomeMessage.style.display = 'none';
+        }
+        
+        const bubble = document.createElement('div');
+        bubble.className = `message-bubble ${isUser ? 'message-user' : 'message-bot'}`;
+        // Preserve line breaks
+        bubble.style.whiteSpace = 'pre-wrap';
+        bubble.textContent = text;
+        
+        chatContainer.appendChild(bubble);
+        
+        // Scroll to bottom
+        requestAnimationFrame(() => {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        });
+    }
+
+    function handleSend() {
+        const message = textarea.value.trim();
+        if (!message) return;
+        
+        // Add user message
+        appendMessage(message, true);
+        
+        // Clear textarea
+        requestAnimationFrame(() => {
+            textarea.value = '';
+            textarea.style.height = 'auto';
+        });
+        
+        // Simulate bot echo after a short delay
+        setTimeout(() => {
+            appendMessage(message, false);
+        }, 400);
+    }
 
     // Handle enter key to send (Shift+Enter for new line)
     textarea.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            const message = this.value.trim();
-            if (!message) return;
-            
-            // TODO: Implement send logic
-            console.log('Send message:', message);
-            
-            requestAnimationFrame(() => {
-                this.value = '';
-                this.style.height = 'auto';
-            });
+            handleSend();
         }
     });
+
+    // Handle send button click
+    if (sendBtn) {
+        sendBtn.addEventListener('click', handleSend);
+    }
     // Custom Dropdown Logic
     const dropdownContainers = document.querySelectorAll('.dropdown-container');
     
