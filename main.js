@@ -10,6 +10,21 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.toggle('sidebar-collapsed');
         });
     }
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            document.body.classList.toggle('sidebar-mobile-open');
+        });
+    }
+
+    if (sidebarBackdrop) {
+        sidebarBackdrop.addEventListener('click', () => {
+            document.body.classList.remove('sidebar-mobile-open');
+        });
+    }
+
 
     // Topic Group Collapsible Logic
     const topicHeaders = document.querySelectorAll('.topic-header');

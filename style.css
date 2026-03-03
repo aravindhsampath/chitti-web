@@ -605,3 +605,97 @@ input:checked + .slider:before {
     transform: translateX(14px);
     background-color: var(--surface);
 }
+
+/* Mobile Topbar */
+.mobile-topbar {
+    display: none;
+    height: 60px;
+    align-items: center;
+    padding: 0 16px;
+    background: rgba(var(--app-bg-rgb), 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 90;
+}
+
+.mobile-title {
+    font-family: 'Roboto', serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-left: 12px;
+    color: var(--primary-text);
+}
+
+/* Sidebar Backdrop */
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 150;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .mobile-topbar {
+        display: flex;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body.sidebar-mobile-open .sidebar {
+        transform: translateX(0);
+    }
+
+    body.sidebar-mobile-open .sidebar-backdrop {
+        display: block;
+        opacity: 1;
+    }
+
+    body.sidebar-collapsed .sidebar {
+        width: 280px; /* Disable collapse width change on mobile */
+        transform: translateX(-100%);
+    }
+    
+    body.sidebar-collapsed.sidebar-mobile-open .sidebar {
+        transform: translateX(0);
+    }
+
+    body.sidebar-collapsed .sidebar-top,
+    body.sidebar-collapsed .sidebar-bottom {
+        justify-content: flex-start;
+        padding: 0 12px;
+    }
+
+    body.sidebar-collapsed .sidebar-content {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .main-wrapper {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    body.sidebar-collapsed .main-wrapper {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .prompt-box {
+        padding: 12px;
+    }
+
+    .left-controls .icon-text-btn span {
+        display: none; /* Hide text in dropdowns on small screens to save space */
+    }
+}
