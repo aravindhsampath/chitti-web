@@ -1,15 +1,275 @@
-body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f4f4f4;
+:root {
+    /* Dark Mode (Default) */
+    --app-bg: #0D0D0C;
+    --app-bg-rgb: 13, 13, 12;
+    --surface: #1C1C1B;
+    --surface-hover: #2A2A29;
+    --primary-text: #E5E5E5;
+    --secondary-text: #888888;
+    --accent: #6366F1;
+    --border-color: #262626;
+
+    --radius-lg: 12px;
+    --radius-md: 8px;
+    --gap: 12px;
+    --header-h: 72px;
 }
 
-#app {
+@media (prefers-color-scheme: light) {
+    :root {
+        /* Light Mode (Warm Stone) */
+        --app-bg: #EAE9E6;
+        --app-bg-rgb: 234, 233, 230;
+        --surface: #FFFFFF;
+        --surface-hover: #F7F6F4;
+        --primary-text: #111111;
+        --secondary-text: #4A4A45;
+        --accent: #6366F1;
+        --border-color: #DCDBD8;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    background-color: var(--app-bg);
+    color: var(--primary-text);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Global Film Grain */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+}
+
+/* Dark Mode Spotlight Gradient */
+@media (prefers-color-scheme: dark) {
+    .spotlight {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(circle at top, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+        z-index: 0;
+    }
+}
+
+/* Header */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--app-bg-rgb), 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.header-content {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+}
+
+.robot-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--primary-text);
+}
+
+.logo h1 {
+    font-family: 'Roboto', serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-size: 1.25rem;
+    color: var(--primary-text);
+}
+
+/* Chat Container */
+.chat-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: calc(var(--header-h) + 24px) 24px 140px;
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centering the welcome text */
+}
+
+.welcome-message {
+    text-align: center;
+    color: var(--secondary-text);
+    font-size: 1.5rem;
+    font-family: 'Roboto', serif;
+    letter-spacing: -0.02em;
+}
+
+/* Prompt Box */
+.prompt-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    background: linear-gradient(to top, var(--app-bg) 80%, transparent);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+}
+
+.prompt-box {
+    background-color: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 800px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.prompt-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.prompt-box:focus-within {
+    border-color: var(--accent);
+}
+
+textarea {
+    background: transparent;
+    border: none;
+    color: var(--primary-text);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    resize: none;
+    outline: none;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    line-height: 1.5;
+}
+
+textarea::placeholder {
+    color: var(--secondary-text);
+}
+
+.prompt-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--secondary-text);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.icon-btn i {
+    font-size: 1.25rem;
+}
+
+.icon-btn:hover {
+    background-color: var(--surface-hover);
+    color: var(--primary-text);
+}
+
+.model-selector select {
+    background-color: transparent;
+    color: var(--secondary-text);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    padding: 6px 12px 6px 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s;
+    appearance: none;
+}
+
+.model-selector select:hover {
+    background-color: var(--surface-hover);
+    color: var(--primary-text);
+}
+
+.model-selector select:focus {
+    border-color: var(--accent);
+}
+
+.send-btn {
+    background-color: var(--surface-hover);
+    color: var(--primary-text);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.send-btn:hover {
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.send-btn i {
+    font-size: 1.25rem;
 }
