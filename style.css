@@ -4,11 +4,10 @@
     --app-bg-rgb: 13, 13, 12;
     --surface: #1C1C1B;
     --surface-hover: #2A2A29;
-    --primary-text: #E5E5E5;
-    --secondary-text: #888888;
+    --primary-text: #F3F3F3; /* Increased contrast */
+    --secondary-text: #A0A0A0; /* Increased contrast */
     --accent: #6366F1;
     --border-color: #262626;
-
     --radius-xl: 16px;
     --radius-lg: 12px;
     --radius-md: 8px;
@@ -46,8 +45,8 @@
     --app-bg-rgb: 13, 13, 12;
     --surface: #1C1C1B;
     --surface-hover: #2A2A29;
-    --primary-text: #E5E5E5;
-    --secondary-text: #888888;
+    --primary-text: #F3F3F3; /* Increased contrast from #E5E5E5 */
+    --secondary-text: #A0A0A0; /* Slightly brighter secondary text */
     --accent: #6366F1;
     --border-color: #262626;
 }
