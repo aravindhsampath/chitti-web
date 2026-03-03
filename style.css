@@ -8,6 +8,12 @@
     --secondary-text: #A0A0A0; /* Increased contrast */
     --accent: #6366F1;
     --border-color: #262626;
+    
+    /* Chat Bubble Tints */
+    --msg-user-bg: rgba(99, 102, 241, 0.08); /* Washed indigo */
+    --msg-user-border: rgba(99, 102, 241, 0.15);
+    --msg-bot-bg: rgba(255, 255, 255, 0.03); /* Washed grey */
+    --msg-bot-border: rgba(255, 255, 255, 0.05);
     --radius-xl: 16px;
     --radius-lg: 12px;
     --radius-md: 8px;
@@ -38,6 +44,12 @@
     --secondary-text: #4A4A45;
     --accent: #6366F1;
     --border-color: #DCDBD8;
+
+    /* Chat Bubble Tints - Light Mode */
+    --msg-user-bg: rgba(99, 102, 241, 0.08);
+    --msg-user-border: rgba(99, 102, 241, 0.15);
+    --msg-bot-bg: rgba(0, 0, 0, 0.03);
+    --msg-bot-border: rgba(0, 0, 0, 0.05);
 }
 
 :root[data-theme="dark"] {
@@ -49,6 +61,12 @@
     --secondary-text: #A0A0A0; /* Slightly brighter secondary text */
     --accent: #6366F1;
     --border-color: #262626;
+
+    /* Chat Bubble Tints */
+    --msg-user-bg: rgba(99, 102, 241, 0.08);
+    --msg-user-border: rgba(99, 102, 241, 0.15);
+    --msg-bot-bg: rgba(255, 255, 255, 0.03);
+    --msg-bot-border: rgba(255, 255, 255, 0.05);
 }
 
 * {
@@ -303,22 +321,29 @@ body.sidebar-collapsed .main-wrapper {
     word-wrap: break-word;
     animation: fadeIn 0.3s ease-out;
 }
+@media (min-width: 1024px) {
+    .message-bubble {
+        font-size: 0.9375rem; /* ~15px on larger screens */
+        padding: 14px 18px;
+    }
+}
+
 
 .message-user {
-    background-color: var(--surface);
+    background-color: var(--msg-user-bg);
     color: var(--primary-text);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--msg-user-border);
     align-self: flex-end;
     border-bottom-right-radius: 4px;
 }
 
 .message-bot {
-    background-color: transparent;
+    background-color: var(--msg-bot-bg);
     color: var(--primary-text);
+    border: 1px solid var(--msg-bot-border);
     align-self: flex-start;
-    padding-left: 0;
+    border-bottom-left-radius: 4px;
 }
-
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
