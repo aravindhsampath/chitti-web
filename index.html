@@ -16,12 +16,12 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="sidebar-collapsed">
     <div class="spotlight"></div>
     
-    <header class="topbar">
-        <div class="header-content">
-            <div class="logo">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-top">
+            <button class="icon-btn" id="toggle-sidebar" aria-label="Toggle Sidebar" title="Toggle Sidebar">
                 <svg class="robot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="11" width="18" height="10" rx="2" />
                     <circle cx="12" cy="5" r="2" />
@@ -29,10 +29,35 @@
                     <line x1="8" y1="16" x2="8.01" y2="16" />
                     <line x1="16" y1="16" x2="16.01" y2="16" />
                 </svg>
-                <h1>Chitti</h1>
+            </button>
+        </div>
+        
+        <div class="sidebar-content">
+            <div class="topic-group">
+                <h3>#ebike-hunt</h3>
+                <ul>
+                    <li><button>choice of front suspension</button></li>
+                    <li><button>tyres</button></li>
+                    <li><button>ebike or not?</button></li>
+                </ul>
+            </div>
+            <div class="topic-group">
+                <h3>#ADHD-meds</h3>
+                <ul>
+                    <li><button>academic research</button></li>
+                    <li><button>local meds</button></li>
+                </ul>
             </div>
         </div>
-    </header>
+
+        <div class="sidebar-bottom">
+            <button class="icon-btn" aria-label="User Profile" title="User Profile">
+                <i class="ph ph-user"></i>
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-wrapper" id="main-wrapper">
 
     <main class="chat-container">
         <div class="welcome-message">
@@ -66,6 +91,7 @@
                 </button>
             </div>
         </div>
+    </div>
     </div>
 
     <script defer src="main.js"></script>

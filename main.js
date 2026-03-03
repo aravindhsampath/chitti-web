@@ -2,6 +2,14 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const textarea = document.getElementById('prompt-input');
+    const toggleSidebarBtn = document.getElementById('toggle-sidebar');
+
+    // Toggle sidebar
+    if (toggleSidebarBtn) {
+        toggleSidebarBtn.addEventListener('click', () => {
+            document.body.classList.toggle('sidebar-collapsed');
+        });
+    }
 
     // Auto-resize textarea based on content
     textarea.addEventListener('input', function() {
