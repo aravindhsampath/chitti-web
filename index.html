@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Roboto:wght@600&display=swap" rel="stylesheet">
     
     <!-- Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
     
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
@@ -42,32 +42,32 @@
 
     <div class="prompt-wrapper">
         <div class="prompt-box">
-            <textarea id="prompt-input" placeholder="Message Chitti..." rows="1"></textarea>
+            <textarea id="prompt-input" placeholder="Message Chitti..." rows="1" aria-label="Message input"></textarea>
             <div class="prompt-controls">
                 <div class="left-controls">
-                    <button class="icon-btn" title="Add files">
+                    <button class="icon-btn" aria-label="Add files" title="Add files">
                         <i class="ph ph-paperclip"></i>
                     </button>
-                    <button class="icon-btn" title="Toggle Thinking">
+                    <button class="icon-btn" aria-label="Toggle Thinking" title="Toggle Thinking">
                         <i class="ph ph-brain"></i>
                     </button>
-                    <button class="icon-btn" title="Toggle Memory">
+                    <button class="icon-btn" aria-label="Toggle Memory" title="Toggle Memory">
                         <i class="ph ph-database"></i>
                     </button>
                     <div class="model-selector">
-                        <select>
+                        <select aria-label="Model selector">
                             <option>Chitti Default</option>
                             <option>Chitti Pro</option>
                         </select>
                     </div>
                 </div>
-                <button class="send-btn" title="Send message">
+                <button class="send-btn" aria-label="Send message" title="Send message">
                     <i class="ph ph-paper-plane-right"></i>
                 </button>
             </div>
         </div>
     </div>
 
-    <script src="main.js"></script>
+    <script defer src="main.js"></script>
 </body>
 </html>
